@@ -1,0 +1,13 @@
+Android Requirements:
+	- GPS:
+		- Whenever a user registers to the service. Save location when registering. Add a button to update location on the server. Show indication for the user of his current location. 
+	- MAPS:
+		- Give a possibility to view all lawyers in a radius from current location.
+	- LAWYER_LIST:
+		- Each user can add a lawyer as a 'friend', the user can click his name and call him.
+	- INNER_DB:
+		- Save login credentials (optional on logging in).
+	- CAMERA:
+		- When registering to the service, give an option to take an image of yourself. (if not, make default male / female image).
+		
+	
