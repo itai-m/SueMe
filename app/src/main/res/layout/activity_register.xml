@@ -2,42 +2,28 @@
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/GridLayout1"
-    android:layout_width="wrap_content"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:columnCount="4"
-    android:rowCount="13"
+    android:rowCount="20"
     android:orientation="vertical"
     tools:context=".GridXMLActivity"
     android:minHeight="10dp"
     android:minWidth="10dp"
     android:useDefaultMargins="false">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/DisplayNameTextView"
-        android:layout_row="1"
-        android:layout_column="1"
-        android:text="Display Name:" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/DisplayNameText"
+        android:ems="10"
         android:layout_row="1"
-        android:layout_column="3"
+        android:layout_column="0"
         android:minWidth="200dp"
-        android:layout_gravity="fill_horizontal" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/EmailTextView"
-        android:layout_row="2"
-        android:layout_column="1"
-        android:text="Email" />
+        android:layout_gravity="center_horizontal"
+        android:layout_columnSpan="1"
+        android:hint="Display name"
+        android:textAlignment="center" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -46,17 +32,11 @@
         android:ems="10"
         android:id="@+id/EmailText"
         android:layout_row="2"
-        android:layout_column="3"
-        android:layout_gravity="fill_horizontal" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/PasswordTextView"
-        android:layout_row="3"
-        android:layout_column="1"
-        android:text="Password:" />
+        android:layout_column="0"
+        android:layout_gravity="center_horizontal"
+        android:layout_columnSpan="1"
+        android:hint="Email address"
+        android:textAlignment="center" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -65,16 +45,11 @@
         android:ems="10"
         android:id="@+id/PasswordText"
         android:layout_row="3"
-        android:layout_column="3" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/PasswordView"
-        android:layout_row="4"
-        android:layout_column="1"
-        android:text="RePassword:" />
+        android:layout_column="0"
+        android:layout_gravity="center_horizontal"
+        android:layout_columnSpan="1"
+        android:hint="Password"
+        android:textAlignment="center" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -83,5 +58,90 @@
         android:ems="10"
         android:id="@+id/RePasswordText"
         android:layout_row="4"
-        android:layout_column="3" />
+        android:layout_column="0"
+        android:layout_gravity="center_horizontal"
+        android:layout_columnSpan="1"
+        android:hint="Re-enter password"
+        android:textAlignment="center" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:id="@+id/registerMainText"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:textSize="40dp"
+        android:gravity="center"
+        android:layout_columnSpan="1" />
+
+    <LinearLayout android:layout_row="5"
+        android:layout_column="0"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User Type:"
+            android:id="@+id/UserTypeText"
+            android:textSize="20dp" />
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LawyerToggle"
+            android:id="@+id/toggleButton"
+            android:textOn="Lawyer"
+            android:textOff="Regular User" />
+    </LinearLayout>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:layout_row="6"
+        android:layout_column="0"
+        android:layout_gravity="center_horizontal"
+        android:hint="Phone number"
+        android:textAlignment="center" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Location"
+        android:id="@+id/GetLocationButton"
+        android:layout_row="7"
+        android:layout_column="0"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location: Unknown"
+        android:id="@+id/LocationTextView"
+        android:layout_row="8"
+        android:layout_column="0"
+        android:textSize="20dp"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/GapHolderTextView"
+        android:layout_row="9"
+        android:layout_column="0"
+        android:minHeight="50dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:id="@+id/SubmitButton"
+        android:layout_row="10"
+        android:layout_column="0"
+        android:layout_gravity="center_horizontal"
+        android:minWidth="200dp" />
+
 </GridLayout>
