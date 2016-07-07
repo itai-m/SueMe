@@ -1,13 +1,15 @@
 package com.example.itai.sueme;
 
 public class User {
+    private int Id;
     private String Name;
     private String Email;
     private String Phonenumber;
     private String Location;
     private boolean Lawyer;
 
-    public User(String name, String email, String phonenumber, String location, boolean lawyer) {
+    public User(int id, String name, String email, String phonenumber, String location, boolean lawyer) {
+        Id = id;
         Name = name;
         Email = email;
         Phonenumber = phonenumber;
