@@ -2,9 +2,6 @@ package com.example.itai.sueme;
 
 import android.provider.BaseColumns;
 
-/**
- * Created by Itai on 04/07/2016.
- */
 public class Constant {
     private Constant(){
         throw new AssertionError("Can't create constant");
