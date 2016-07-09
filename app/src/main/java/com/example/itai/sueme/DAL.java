@@ -20,6 +20,10 @@ interface DALCallback {
     void callback();
 }
 
+interface DALCallbackUserObject {
+    void callback(User u);
+}
+
 public class DAL {
 
     public static void getLastArticle(int numer, final DALCallback callback){
@@ -88,9 +92,10 @@ public class DAL {
         return 0;
     }
 
-    public static User getUserByID (int id){
+    public static User getUserByID (int id, final DALCallbackUserObject callback){
         String apiCall = UrlBuider.getUser(id);
 
+        final DALCallbackUserObject callbk = callback;
         // Actions to do when succeeding
         Response.Listener<JSONObject> response = new Response.Listener<JSONObject>() {
 
@@ -98,6 +103,10 @@ public class DAL {
             public void onResponse(JSONObject response) {
                 // Do stuff here with the response.
                 Log.d("", "Response: " + response.toString());
+                User u = jsonToUser(response);
+                if (callbk != null) {
+                    callbk.callback(u);
+                }
             }
         };
 

@@ -15,10 +15,32 @@ import android.widget.TextView;
  */
 public class ProfileActivity extends AppCompatActivity {
     static boolean PhoneCallPermission = true;
+    static User CurrentActiveProfile = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        // Get current profile id
+        Intent mIntent = getIntent();
+        int profileId = mIntent.getIntExtra("profileId", 0);
+        PopulateProfilePage(profileId);
+
+    }
+
+    private void PopulateProfilePage(int profileId) {
+        DAL.getUserByID(profileId, new DALCallbackUserObject() {
+            @Override
+            public void callback(final User u) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        CurrentActiveProfile = u;
+                        ((TextView)findViewById(R.id.ProfileDisplayName)).setText("Welcome, " + u.getName() + " !");
+                        ((TextView)findViewById(R.id.PhoneNumberProfileText)).setText(u.getPhonenumber());
+                    }
+                });
+            }
+        });
     }
 
     public void onCallClick(View v) {
