@@ -5,42 +5,38 @@ import android.util.Log;
 
 import com.android.volley.Request;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.android.volley.toolbox.RequestFuture;
 
 import org.json.JSONObject;
 
 
 public class DAL {
 
-
     public DAL(){
     }
 
     public int addUser(User user){
-        String url = Constant.DataBase.URL;
-        String apiCall = "?Action=insertUser&Name=%s&Email=%s&Phonenumber=%s&Location=%s&Lawyer=%d";
-        int isLawyer = user.isLawyer() ? 1 : 0;
-        String location = (user.getLocation().compareTo("Not found") == 0) ? "" : user.getLocation();
-        apiCall = String.format(apiCall, user.getName(), user.getEmail(),  user.getPhonenumber(), location, isLawyer);
-        String fullUrl = String.format("%s%s", url, apiCall);
-        JSONObject json = getJson(fullUrl);
+        String apiCall = UrlBuider.insertUser(user);
+        JSONObject json = sendJson(apiCall);
+        try{
+            Log.d("test", "" + json.getInt("id"));
+        }catch (Exception e){
+
+        }
         return 0;
     }
 
     public User getUserByID (int id){
-        String url = String.format(Constant.DataBase.URL);
-        url = "http://sueme.berry-games.com/api.php?todo=getUserByID&Id=165";
-        JSONObject json = getJson(url);
+        String apiCall = UrlBuider.getUser(id);
+        sendJson(apiCall);
         return null;
     }
 
-    private JSONObject getJson(String url){
-        JSONObject toReturn;
+    private JSONObject sendJson(String url){
+        RequestFuture<JSONObject> future = RequestFuture.newFuture();
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
         (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
@@ -57,6 +53,13 @@ public class DAL {
             }
         });
         AppController.getInstance().addToRequestQueue(jsObjRequest);
-        return null;
+        try {
+            JSONObject response = future.get();
+            return response;
+        } catch (Exception e) {
+            return null;
+        }
     }
+
+
 }
