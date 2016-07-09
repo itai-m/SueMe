@@ -77,6 +77,20 @@ public class UrlBuider {
         return toReturn;
     }
 
+    public static String getTagByID(int id) {
+        String toReturn = Constant.DataBase.URL;
+        toReturn += Action(Constant.DataBase.GET_TAG_BY_ID)
+                + andEqual(Constant.DataBase.ID, String.valueOf(id));
+        return toReturn;
+    }
+
+    public static String getTagIdByArticleID(int articleID) {
+        String toReturn = Constant.DataBase.URL;
+        toReturn += Action(Constant.DataBase.GET_TAG_ID_BY_ARTICLE_ID)
+                + andEqual(Constant.DataBase.ARTICLE_ID, String.valueOf(articleID));
+        return toReturn;
+    }
+
     private static String andEqual(String var, String res){
         return AND + var + EQUAL + res;
     }

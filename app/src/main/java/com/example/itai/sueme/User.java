@@ -18,6 +18,14 @@ public class User {
         Lawyer = lawyer;
     }
 
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
     public String getName() {
         return Name;
     }
