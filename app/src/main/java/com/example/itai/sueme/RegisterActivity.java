@@ -32,8 +32,11 @@ public class RegisterActivity extends AppCompatActivity {
         String rePassword = ((EditText) (findViewById(R.id.RePasswordText))).getText().toString();
         ToggleButton tg = (ToggleButton) findViewById(R.id.toggleButton);
         // If toggle button on = lawyer, else it's a regular user.
-        String user_type = tg.getText().toString();
+        String userType = tg.getText().toString();
         String currLocation = ((TextView) (findViewById(R.id.CurrentLocationTextview))).getText().toString();
+        String phoneNumber = ((EditText) (findViewById(R.id.PhoneNumberText))).getText().toString();
+        boolean isLawyer = (userType.compareTo("Lawyer") == 0) ? true : false;
+        User userToRegister = new User(0, displayName, email, phoneNumber, currLocation, isLawyer);
     }
 
     public void onGetLocationClick(View v) {

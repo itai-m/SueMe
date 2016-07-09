@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Article Name"
+        android:id="@+id/ArticleNameText"
+        android:textSize="25dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Author Name"
+        android:id="@+id/AuthorNameText"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Article content goes here Article content goes here Article content goes here Article content goes here Article content goes hereArticle content goes here Article content goes here Article content goes here Article content goes here Article content goes hereArticle content goes here Article content goes here Article content goes here Article content goes here Article content goes here"
+        android:id="@+id/ArticleContentText"
+        android:textSize="17dp" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="159dp"
+        android:id="@+id/listView"
+        android:layout_weight="0.49" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="34dp"
+        android:text="New Comment"
+        android:id="@+id/NewCommentButton"
+        android:layout_gravity="center_horizontal" />
+</LinearLayout>
