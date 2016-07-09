@@ -13,6 +13,6 @@ public class Constant {
     }
 
     public static abstract class DataBase {
-        public static final String URL = "sueme.berry-games.com/api.php";
+        public static final String URL = "http://sueme.berry-games.com/api.php";
     }
 }
