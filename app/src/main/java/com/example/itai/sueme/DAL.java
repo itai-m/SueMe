@@ -33,46 +33,64 @@ public class DAL {
 
     public int addUser(User user){
         String apiCall = UrlBuider.insertUser(user);
-        JSONObject json = sendJson(apiCall);
-        try{
-            Log.d("test", "" + json.getInt("id"));
-        }catch (Exception e){
 
-        }
+        // Actions to do when succeeding
+        Response.Listener<JSONObject> response = new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                try{
+                    Log.d("test", "" + response.getInt("id"));
+                } catch (Exception e){
+
+                }
+            }
+        };
+
+        // Actions to do when faililng:
+        Response.ErrorListener error = new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("", "Error");
+            }
+        };
+
+        JSONObject json = sendJson(apiCall, response, error);
         return 0;
     }
 
     public User getUserByID (int id){
         String apiCall = UrlBuider.getUser(id);
-        sendJson(apiCall);
-        return null;
-    }
 
-    private JSONObject sendJson(String url){
-        RequestFuture<JSONObject> future = RequestFuture.newFuture();
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest
-        (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+        // Actions to do when succeeding
+        Response.Listener<JSONObject> response = new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
+                // Do stuff here with the response.
                 Log.d("", "Response: " + response.toString());
                 setJsonObject(response);
             }
-        }, new Response.ErrorListener() {
+        };
+
+        // Actions to do when faililng:
+        Response.ErrorListener error = new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("", "Error");
-
             }
-        });
+        };
+        sendJson(apiCall, response, error);
+        return null;
+    }
+
+    private JSONObject sendJson(String url, Response.Listener<JSONObject> responseCallback, Response.ErrorListener errCallback){
+        JSONObject toReturn;
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, responseCallback, errCallback);
         AppController.getInstance().addToRequestQueue(jsObjRequest);
-        try {
-            JSONObject response = future.get();
-            return response;
-        } catch (Exception e) {
-            return null;
-        }
+        return null;
     }
 
 }
