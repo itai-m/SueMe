@@ -29,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         spinner = (ProgressBar)findViewById(R.id.registerProgressBar);
+        spinner.setVisibility(View.GONE);
     }
 
     public void onRegisterSubmitClick(View v) {
@@ -49,11 +50,11 @@ public class RegisterActivity extends AppCompatActivity {
         DAL.addUser(userToRegister, new DALCallback() {
             @Override
             public void callback() {
-                spinner.setVisibility(View.VISIBLE);
+                spinner.setVisibility(View.GONE);
                 startActivityFromMainThread();
             }
         });
-        spinner.setVisibility(View.GONE);
+        spinner.setVisibility(View.VISIBLE);
     }
 
     public void startActivityFromMainThread() {
