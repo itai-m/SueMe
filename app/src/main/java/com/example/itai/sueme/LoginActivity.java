@@ -33,7 +33,6 @@ public class LoginActivity extends AppCompatActivity {
         DAL.getUserByEmail(email, new DALCallback() {
             @Override
             public void callback() {
-                spinner.setVisibility(View.GONE);
                 String pass = ((EditText) (findViewById(R.id.passwordField))).getText().toString();
                 if (true) {
                     // TODO: need to add password Check
