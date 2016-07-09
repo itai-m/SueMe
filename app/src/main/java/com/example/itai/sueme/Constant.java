@@ -20,6 +20,7 @@ public class Constant {
         public static final String PHONE = "Phonenumber";
         public static final String LOCATION = "Location";
         public static final String LAWYER = "Lawyer";
+        public static final String ID = "id";
 
         public static final String ACTION = "Action";
 
