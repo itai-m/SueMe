@@ -8,5 +8,63 @@
         android:layout_height="wrap_content"
         android:text="Profile Display Name"
         android:id="@+id/ProfileDisplayName"
-        android:textSize="25dp" />
+        android:textSize="25dp"
+        android:textColor="#000000"
+        android:minHeight="50dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Short Biography Text Upto 255 chars?"
+        android:id="@+id/BiographyProfileText"
+        android:textColor="#000000"
+        android:minHeight="90dp" />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="90dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PhoneNumber"
+            android:id="@+id/PhoneNumberProfileText"
+            android:textSize="15dp"
+            android:textColor="#000000" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Call"
+            android:id="@+id/CallProfileButton"
+            android:layout_marginLeft="25dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Get Location"
+            android:id="@+id/GetLocationProfileButton"
+            android:layout_marginLeft="25dp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gap1"
+        android:minHeight="70dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Latest Articles"
+        android:id="@+id/LatestArticlesProfileText"
+        android:layout_gravity="center_horizontal" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView2"
+        android:layout_gravity="center_horizontal" />
+
 </LinearLayout>
