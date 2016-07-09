@@ -36,12 +36,13 @@ public class LoginActivity extends AppCompatActivity {
     private void waitForUserInfo(){
         spinner.setVisibility(View.VISIBLE);
         try {
-            while (findUser) {
+            while (!findUser) {
                 wait(500);
             }
         }catch (Exception e){
             Log.d("Erorr", e.getMessage());
         }
+        findUser = false;
         spinner.setVisibility(View.GONE);
     }
 

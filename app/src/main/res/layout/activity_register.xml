@@ -152,5 +152,11 @@
         android:layout_column="0"
         android:layout_gravity="center_horizontal"
         android:minWidth="200dp" />
+    <ProgressBar
+        android:id="@+id/registerProgressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true" />
 
 </GridLayout>
