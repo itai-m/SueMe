@@ -10,13 +10,26 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.RequestFuture;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 
 public class DAL {
 
+
+    private JSONObject jsonObject;
+
     public DAL(){
     }
+
+    public JSONObject getJsonObject() {
+        return jsonObject;
+    }
+
+    public void setJsonObject(JSONObject jsonObject) {
+        this.jsonObject = jsonObject;
+    }
+
 
     public int addUser(User user){
         String apiCall = UrlBuider.insertUser(user);
@@ -43,6 +56,7 @@ public class DAL {
             @Override
             public void onResponse(JSONObject response) {
                 Log.d("", "Response: " + response.toString());
+                setJsonObject(response);
             }
         }, new Response.ErrorListener() {
 
@@ -60,6 +74,5 @@ public class DAL {
             return null;
         }
     }
-
 
 }

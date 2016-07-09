@@ -14,9 +14,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onClickRegisterButton(View v) {
-        DAL dal = new DAL();
-        dal.addUser(new User(0, "name", "email", "phonenumber", "location", false));
-        /*Intent registerIntent = new Intent(this, RegisterActivity.class);
-        startActivity(registerIntent);*/
+        Intent registerIntent = new Intent(this, RegisterActivity.class);
+        startActivity(registerIntent);
     }
 }
