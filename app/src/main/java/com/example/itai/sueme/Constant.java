@@ -41,12 +41,15 @@ public class Constant {
         public static final String ARTICLE_TITLE = "ArticleTitle";
         public static final String ARTICLE_CONTENT = "ArticleContent";
         public static final String CREATOR_ID = "CreatorID";
+        public static final String CREATOR_DISPLAY_NAME = "CreatorDisplayName";
+
 
         public static final String TAG_ID = "TagID";
         public static final String ARTICLE_ID = "ArticleID";
 
         public static final String COMMENTOTOR_OR_DISPLAYNAME = "CommentatorDisplayName";
         public static final String COMMENT_CONTENT = "CommentContent";
+
 
     }
 }

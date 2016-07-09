@@ -21,21 +21,24 @@ import java.util.ArrayList;
  * Created by nadav on 7/9/2016.
  */
 public class HomeActivity extends AppCompatActivity {
-    ArrayList<Article> articles = new ArrayList<Article>();
+    private static final int NUMBER_OF_ARTICLES = 5;
+    static ArrayList<Article> articles = new ArrayList<Article>();
     ArticleListViewAdapter arrayAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        articles.add(new Article(0, "Title", "long description goes here", null, 0, "nadav", null));
-        articles.add(new Article(1, "secpmdToit", "long description goes here", null, 0, "nadav", null));
-        articles.add(new Article(2, "asfopjmasp", "long description goes here", null, 0, "nadav", null));
-        articles.add(new Article(3, "asofdk", "wqofjpqowejgf3pqotjg3p21qojt32pogjpwojpojgwepogjwepo", null, 0, "nadav", null));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        DAL.getLastArticle(NUMBER_OF_ARTICLES, new DALCallback() {
+            @Override
+            public void callback() {
+                PopulateListView();
+            }
+        });
         // Change welcome text
         String name = LoginActivity.ActiveUser.getName();
         ((TextView) findViewById(R.id.WelcomeHomeText)).setText("Welcome, " + name + "!");
-        PopulateListView();
     }
+
 
     private void PopulateListView() {
         ListView lv = (ListView) findViewById(R.id.ArticleHomeListView);

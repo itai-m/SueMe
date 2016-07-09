@@ -38,11 +38,12 @@ public class UrlBuider {
         return toReturn;
     }
 
-    public static String insertTagsToArticle(int tagID, int articleID) {
+    public static String insertTagsToArticle(int tagID, int articleID, String CreatorDisplayName) {
         String toReturn = Constant.DataBase.URL;
         toReturn += Action(Constant.DataBase.INSERT_TAGS_TO_ARTICLE)
                 + andEqual(Constant.DataBase.TAG_ID, String.valueOf(tagID))
-                + andEqual(Constant.DataBase.ARTICLE_ID, String.valueOf(articleID));
+                + andEqual(Constant.DataBase.ARTICLE_ID, String.valueOf(articleID)
+                + andEqual(Constant.DataBase.CREATOR_DISPLAY_NAME, CreatorDisplayName));
         return toReturn;
     }
 
