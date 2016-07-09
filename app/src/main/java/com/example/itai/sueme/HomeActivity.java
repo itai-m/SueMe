@@ -53,8 +53,13 @@ public class HomeActivity extends AppCompatActivity {
                 Article article = (Article) parent.getAdapter().getItem(position);
                 ArticleActivity.article = article;
                 startArticleActivityFromMainThread(article.getArticleID());
-                }
-            });
+            }
+        });
+    }
+
+    public void publishArticleOnClick(View v) {
+        Intent intent = new Intent(HomeActivity.this, PublishArticleActivity.class);
+        startActivity(intent);
     }
 
     public void startArticleActivityFromMainThread(final int articleId) {

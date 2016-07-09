@@ -16,6 +16,14 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.10" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Publish a new article"
+        android:id="@+id/button3"
+        android:layout_gravity="center_horizontal"
+        android:onClick="publishArticleOnClick" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="129dp"
         android:id="@+id/ArticleHomeListView"
-        android:layout_weight="0.73"
+        android:layout_weight="0.30"
         android:layout_marginBottom="40dp" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
