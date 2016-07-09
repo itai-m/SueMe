@@ -7,6 +7,7 @@ import com.android.volley.Request;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.RequestFuture;
 
@@ -25,16 +26,14 @@ public class DAL {
         String apiCall = UrlBuider.getLastArticle(numer);
         final DALCallback callbk = callback;
         // Actions to do when succeeding
-        Response.Listener<JSONObject> response = new Response.Listener<JSONObject>() {
-
+        Response.Listener<JSONArray> response = new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONObject response) {
+            public void onResponse(JSONArray response) {
                 Log.d("Ss",response.toString());
                 try{
-                    JSONObject jArray = response.getJSONObject("");
                     HomeActivity.articles = new ArrayList<Article>();
-                    for (int i=0; i < jArray.length(); i++){
-                        HomeActivity.articles.add(jsonToArticle(jArray.getJSONObject("")));
+                    for (int i=0; i < response.length(); i++){
+                        HomeActivity.articles.add(jsonToArticle(response.getJSONObject(i)));
                     }
                     if (callbk != null) {
                         callbk.callback();
@@ -53,7 +52,7 @@ public class DAL {
                 Log.d("", "Error");
             }
         };
-        sendJson(apiCall, response, error);
+        getJsonArray(apiCall, response, error);
     }
 
     public static int addUser(User user, final DALCallback callback){
@@ -85,7 +84,7 @@ public class DAL {
                 Log.d("", "Error");
             }
         };
-        sendJson(apiCall, response, error);
+        getJsonObject(apiCall, response, error);
         return 0;
     }
 
@@ -110,7 +109,7 @@ public class DAL {
                 Log.d("", "Error");
             }
         };
-        sendJson(apiCall, response, error);
+        getJsonObject(apiCall, response, error);
         return null;
     }
 
@@ -140,7 +139,7 @@ public class DAL {
                 Log.d("", "Error");
             }
         };
-        sendJson(apiCall, response, error);
+        getJsonObject(apiCall, response, error);
         return null;
     }
 
@@ -167,7 +166,7 @@ public class DAL {
                     json.getString(Constant.DataBase.ARTICLE_TITLE),
                     json.getString(Constant.DataBase.ARTICLE_CONTENT),
                     json.getInt(Constant.DataBase.CREATOR_ID),
-                    json.getString(Constant.DataBase.ARTICLE_ID));
+                    json.getString(Constant.DataBase.CREATOR_DISPLAY_NAME));
         }catch (Exception e){
             Log.d("Error", e.getMessage());
         }
@@ -188,11 +187,17 @@ public class DAL {
         return comment;
     }
 
-    private static JSONObject sendJson(String url, Response.Listener<JSONObject> responseCallback, Response.ErrorListener errCallback){
+    private static JSONObject getJsonObject(String url, Response.Listener<JSONObject> responseCallback, Response.ErrorListener errCallback){
         JSONObject toReturn;
         JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, responseCallback, errCallback);
         AppController.getInstance().addToRequestQueue(jsObjRequest);
         return null;
     }
 
+    private static JSONArray getJsonArray(String url, Response.Listener<JSONArray> responseCallback, Response.ErrorListener errCallback) {
+        JSONObject toReturn;
+        JsonArrayRequest jsArrRequest = new JsonArrayRequest(url, responseCallback, errCallback);
+        AppController.getInstance().addToRequestQueue(jsArrRequest);
+        return null;
+    }
 }
