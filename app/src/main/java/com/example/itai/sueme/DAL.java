@@ -17,21 +17,7 @@ import org.json.JSONObject;
 public class DAL {
 
 
-    private JSONObject jsonObject;
-
-    public DAL(){
-    }
-
-    public JSONObject getJsonObject() {
-        return jsonObject;
-    }
-
-    public void setJsonObject(JSONObject jsonObject) {
-        this.jsonObject = jsonObject;
-    }
-
-
-    public int addUser(User user){
+    public static int addUser(User user){
         String apiCall = UrlBuider.insertUser(user);
         LoginActivity.ActiveUser = user;
         // Actions to do when succeeding
@@ -56,12 +42,11 @@ public class DAL {
                 Log.d("", "Error");
             }
         };
-
-        JSONObject json = sendJson(apiCall, response, error);
+        sendJson(apiCall, response, error);
         return 0;
     }
 
-    public User getUserByID (int id){
+    public static User getUserByID (int id){
         String apiCall = UrlBuider.getUser(id);
 
         // Actions to do when succeeding
@@ -71,7 +56,6 @@ public class DAL {
             public void onResponse(JSONObject response) {
                 // Do stuff here with the response.
                 Log.d("", "Response: " + response.toString());
-                setJsonObject(response);
             }
         };
 
@@ -87,7 +71,49 @@ public class DAL {
         return null;
     }
 
-    private JSONObject sendJson(String url, Response.Listener<JSONObject> responseCallback, Response.ErrorListener errCallback){
+    public static User getUserByEmail (String email){
+        String apiCall = UrlBuider.getUserByMail(email);
+
+        // Actions to do when succeeding
+        Response.Listener<JSONObject> response = new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                // Do stuff here with the response.
+                Log.d("", "Response: " + response.toString());
+                LoginActivity.ActiveUser = jsonToUser(response);
+                LoginActivity.findUser = true;
+            }
+        };
+
+        // Actions to do when faililng:
+        Response.ErrorListener error = new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("", "Error");
+            }
+        };
+        sendJson(apiCall, response, error);
+        return null;
+    }
+
+    private static User jsonToUser(JSONObject json){
+        User user = null;
+        try{
+            user = new User(json.getInt(Constant.DataBase.ID),
+                    json.getString(Constant.DataBase.NAME),
+                    json.getString(Constant.DataBase.EMAIL),
+                    json.getString(Constant.DataBase.PHONE),
+                    json.getString(Constant.DataBase.LOCATION),
+                    json.getBoolean(Constant.DataBase.LAWYER));
+        }catch (Exception e){
+            Log.d("Error", e.getMessage());
+        }
+        return user;
+    }
+
+    private static JSONObject sendJson(String url, Response.Listener<JSONObject> responseCallback, Response.ErrorListener errCallback){
         JSONObject toReturn;
         JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, responseCallback, errCallback);
         AppController.getInstance().addToRequestQueue(jsObjRequest);
