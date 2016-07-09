@@ -1,6 +1,8 @@
 package com.example.itai.sueme;
 
 public class User {
+
+
     private int Id;
     private String Name;
     private String Email;
@@ -55,5 +57,13 @@ public class User {
 
     public void setLawyer(boolean lawyer) {
         Lawyer = lawyer;
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
     }
 }
