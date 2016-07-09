@@ -2,6 +2,7 @@ package com.example.itai.sueme;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -9,18 +10,23 @@ import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class RegisterActivity extends AppCompatActivity {
     boolean location_disabled = false;
+    private ProgressBar spinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        spinner = (ProgressBar)findViewById(R.id.progressBar);
     }
 
     public void onRegisterSubmitClick(View v) {
@@ -37,9 +43,27 @@ public class RegisterActivity extends AppCompatActivity {
         String phoneNumber = ((EditText) (findViewById(R.id.PhoneNumberText))).getText().toString();
         boolean isLawyer = (userType.compareTo("Lawyer") == 0) ? true : false;
         User userToRegister = new User(0, displayName, email, phoneNumber, currLocation, isLawyer);
-        DAL dal = new DAL();
-        dal.addUser(userToRegister);
+        LoginActivity.ActiveUser = userToRegister;
+        DAL.addUser(userToRegister);
+        waitForUserInfo();
+        Intent homeIntent = new Intent(this, HomeActivity.class);
+        startActivity(homeIntent);
     }
+
+    private void waitForUserInfo(){
+        spinner.setVisibility(View.VISIBLE);
+        try {
+            while (!LoginActivity.findUser) {
+                wait(500);
+            }
+        }catch (Exception e){
+            Log.d("Erorr", e.getMessage());
+            LoginActivity.findUser = false;
+        }
+
+        spinner.setVisibility(View.GONE);
+    }
+
 
     public void onGetLocationClick(View v) {
         if (location_disabled == true)
