@@ -2,10 +2,6 @@ package com.example.itai.sueme;
 
 public class User {
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 95fa120eaa379e46cfee983dcd1462cb1b3f72be
     private int Id;
     private String Name;
     private String Email;
@@ -20,14 +16,6 @@ public class User {
         Phonenumber = phonenumber;
         Location = location;
         Lawyer = lawyer;
-    }
-
-    public int getId() {
-        return Id;
-    }
-
-    public void setId(int id) {
-        Id = id;
     }
 
     public String getName() {
