@@ -19,6 +19,10 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        // Change welcome text
+        String name = LoginActivity.ActiveUser.getName();
+        ((TextView) findViewById(R.id.WelcomeHomeText)).setText("Welcome, " + name + "!");
+
     }
 
 }
