@@ -106,6 +106,13 @@ public class UrlBuider {
         return toReturn;
     }
 
+    public static String searchArticleInTitle(String name) {
+        String toReturn = Constant.DataBase.URL;
+        toReturn += Action(Constant.DataBase.SEARCH_ARTICLE_IN_TITLE)
+                + andEqual(Constant.DataBase.NAME, name);
+        return toReturn;
+    }
+
     private static String andEqual(String var, String res){
         return AND + var + EQUAL + res;
     }

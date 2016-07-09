@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -74,4 +75,14 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+    public void sharchArticle(View v) {
+        String name = ((EditText) (findViewById(R.id.SearchArticleHomeEditText))).getText().toString();
+        DAL.getArticleByName(name, new DALCallback() {
+            @Override
+            public void callback() {
+                PopulateListView();
+            }
+        });
+    }
+
 }
