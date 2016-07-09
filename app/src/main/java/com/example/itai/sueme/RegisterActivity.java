@@ -81,7 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
-            case 1: {
+            case 1: { // Location permission.
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -92,7 +92,12 @@ public class RegisterActivity extends AppCompatActivity {
                 GetLocation();
                 return;
             }
-            // other 'case' lines to check for other
+            case 2: { // Phone call permission.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                }
+                return;
+            }
             // permissions this app might request
         }
     }
