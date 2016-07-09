@@ -36,4 +36,6 @@ public class ArticleListViewAdapter extends ArrayAdapter<Article> {
         // Return the completed view to render on screen
         return convertView;
     }
+
+
 }

@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -37,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
                 String pass = ((EditText) (findViewById(R.id.passwordField))).getText().toString();
                 if (true) {
                     // TODO: need to add password Check
-                    startActivityFromMainThread();
+                    startHomeActivityFromMainThread();
                 }
             }
         });
@@ -50,7 +49,8 @@ public class LoginActivity extends AppCompatActivity {
         Intent profileIntent = new Intent(this, ProfileActivity.class);
         startActivity(profileIntent);
     }
-    public void startActivityFromMainThread() {
+
+    public void startHomeActivityFromMainThread() {
 
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {

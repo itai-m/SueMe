@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -40,6 +43,26 @@ public class HomeActivity extends AppCompatActivity {
                 this,
                 articles );
         lv.setAdapter(arrayAdapter);
+        // Set the onclick listener.
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Article article = (Article) parent.getAdapter().getItem(position);
+                startArticleActivityFromMainThread(article.getArticleID());
+                }
+            });
     }
 
+    public void startArticleActivityFromMainThread(final int articleId) {
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(HomeActivity.this, ArticleActivity.class);
+                intent.putExtra("articleId", articleId);
+                startActivity(intent);
+            }
+        });
+    }
 }
