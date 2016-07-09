@@ -20,6 +20,7 @@
         </activity>
         <activity android:name=".RegisterActivity"></activity>
         <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".HomeActivity"></activity>
     </application>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
