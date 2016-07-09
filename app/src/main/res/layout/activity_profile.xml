@@ -38,7 +38,8 @@
             android:layout_height="wrap_content"
             android:text="Call"
             android:id="@+id/CallProfileButton"
-            android:layout_marginLeft="25dp" />
+            android:layout_marginLeft="25dp"
+            android:onClick="onCallClick" />
 
         <Button
             android:layout_width="wrap_content"
