@@ -29,11 +29,42 @@ public class DAL {
         Response.Listener<JSONArray> response = new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Log.d("Ss",response.toString());
                 try{
                     HomeActivity.articles = new ArrayList<Article>();
                     for (int i=0; i < response.length(); i++){
                         HomeActivity.articles.add(jsonToArticle(response.getJSONObject(i)));
+                    }
+                    if (callbk != null) {
+                        callbk.callback();
+                    }
+                } catch (Exception e){
+                    Log.d("Error", e.getMessage());
+                }
+            }
+        };
+
+        // Actions to do when faililng:
+        Response.ErrorListener error = new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error", error.getMessage());
+            }
+        };
+        getJsonArray(apiCall, response, error);
+    }
+
+    public static void getCommets(int articleID, final DALCallback callback){
+        String apiCall = UrlBuider.getCommentByArticleID(articleID);
+        final DALCallback callbk = callback;
+        // Actions to do when succeeding
+        Response.Listener<JSONArray> response = new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try{
+                    ArticleActivity.comments = new ArrayList<Comment>();
+                    for (int i=0; i < response.length(); i++){
+                        ArticleActivity.comments.add(jsonToCommet(response.getJSONObject(i)));
                     }
                     if (callbk != null) {
                         callbk.callback();

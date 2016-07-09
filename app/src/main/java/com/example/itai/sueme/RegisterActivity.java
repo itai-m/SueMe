@@ -50,7 +50,6 @@ public class RegisterActivity extends AppCompatActivity {
         DAL.addUser(userToRegister, new DALCallback() {
             @Override
             public void callback() {
-                spinner.setVisibility(View.GONE);
                 startActivityFromMainThread();
             }
         });

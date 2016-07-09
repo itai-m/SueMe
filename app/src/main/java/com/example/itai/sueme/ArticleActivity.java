@@ -22,19 +22,28 @@ import java.util.ArrayList;
  */
 public class ArticleActivity extends AppCompatActivity {
 
-    ArrayList<Comment> comments = null;
+    static Article article = null;
+    static ArrayList<Comment> comments = null;
     CommentListViewAdapter arrayAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         comments = new ArrayList<Comment>();
-        comments.add(new Comment(1, 1, "nadav", "my pretty comment", 12));
-        comments.add(new Comment(1, 1, "nadav", "my ugly comment", 12));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
-        // Get the article id from the intent.
-        Intent mIntent = getIntent();
-        int articleId = mIntent.getIntExtra("articleId", 0);
-        PopulateComments();
+        PopulateArticle();
+        DAL.getCommets(article.getArticleID(), new DALCallback() {
+            @Override
+            public void callback() {
+                PopulateComments();
+            }
+        });
+
+    }
+
+    private void PopulateArticle(){
+        ((TextView)findViewById(R.id.ArticleNameText)).setText(article.getArticleTitle());
+        ((TextView)findViewById(R.id.AuthorNameText)).setText(article.getCreatorDisplayName());
+        ((TextView)findViewById(R.id.ArticleContentText)).setText(article.getArticleContent());
     }
 
     private void PopulateComments() {

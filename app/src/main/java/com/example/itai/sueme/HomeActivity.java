@@ -51,6 +51,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Article article = (Article) parent.getAdapter().getItem(position);
+                ArticleActivity.article = article;
                 startArticleActivityFromMainThread(article.getArticleID());
                 }
             });
