@@ -29,17 +29,18 @@ public class DAL {
 
             @Override
             public void onResponse(JSONObject response) {
+                Log.d("Ss",response.toString());
                 try{
-                    JSONArray jArray = response.getJSONArray("");
+                    JSONObject jArray = response.getJSONObject("");
                     HomeActivity.articles = new ArrayList<Article>();
                     for (int i=0; i < jArray.length(); i++){
-                        HomeActivity.articles.add(jsonToArticle(jArray.getJSONObject(i)));
+                        HomeActivity.articles.add(jsonToArticle(jArray.getJSONObject("")));
                     }
                     if (callbk != null) {
                         callbk.callback();
                     }
                 } catch (Exception e){
-
+                    Log.d("Error", e.getMessage());
                 }
             }
         };
