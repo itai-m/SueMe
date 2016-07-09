@@ -18,6 +18,14 @@ public class User {
         Lawyer = lawyer;
     }
 
+    public User(int id, String name, String email, String phonenumber, String location, int lawyer) {
+        Id = id;
+        Name = name;
+        Email = email;
+        Phonenumber = phonenumber;
+        Location = location;
+        Lawyer = (lawyer == 1) ? true: false;
+    }
     public int getId() {
         return Id;
     }

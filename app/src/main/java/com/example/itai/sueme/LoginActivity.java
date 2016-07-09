@@ -1,6 +1,8 @@
 package com.example.itai.sueme;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,29 +30,19 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onClickLoginButton(View v) {
         String email = ((EditText) (findViewById(R.id.emailField))).getText().toString();
-        DAL.getUserByEmail(email);
-        waitForUserInfo();
-        checkUserPass(ActiveUser);
-    }
-
-    private void waitForUserInfo(){
-        spinner.setVisibility(View.VISIBLE);
-        try {
-            while (findUser) {
-                wait(500);
+        DAL.getUserByEmail(email, new DALCallback() {
+            @Override
+            public void callback() {
+                spinner.setVisibility(View.GONE);
+                String pass = ((EditText) (findViewById(R.id.passwordField))).getText().toString();
+                if (true) {
+                    // TODO: need to add password Check
+                    startActivityFromMainThread();
+                }
             }
-        }catch (Exception e){
-            Log.d("Erorr", e.getMessage());
-        }
-        spinner.setVisibility(View.GONE);
-    }
+        });
+        spinner.setVisibility(View.VISIBLE);
 
-    private void checkUserPass(User user){
-        String pass = ((EditText) (findViewById(R.id.passwordField))).getText().toString();
-        if (true) {///TODO: need to add password Check
-            Intent homeIntent = new Intent(this, HomeActivity.class);
-            startActivity(homeIntent);
-        }
     }
 
     public void DEBUG_ONCLICK_CALLBACK(View v)
@@ -58,5 +50,15 @@ public class LoginActivity extends AppCompatActivity {
         Intent profileIntent = new Intent(this, ProfileActivity.class);
         startActivity(profileIntent);
     }
+    public void startActivityFromMainThread() {
 
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
 }

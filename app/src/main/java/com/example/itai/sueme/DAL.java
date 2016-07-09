@@ -13,6 +13,9 @@ import com.android.volley.toolbox.RequestFuture;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+interface DALCallback {
+    void callback();
+}
 
 public class DAL {
 
@@ -71,9 +74,9 @@ public class DAL {
         return null;
     }
 
-    public static User getUserByEmail (String email){
+    public static User getUserByEmail (String email, final DALCallback callback){
         String apiCall = UrlBuider.getUserByMail(email);
-
+        final DALCallback callbk = callback;
         // Actions to do when succeeding
         Response.Listener<JSONObject> response = new Response.Listener<JSONObject>() {
 
@@ -83,6 +86,9 @@ public class DAL {
                 Log.d("", "Response: " + response.toString());
                 LoginActivity.ActiveUser = jsonToUser(response);
                 LoginActivity.findUser = true;
+                if (callbk != null) {
+                    callbk.callback();
+                }
             }
         };
 
@@ -98,6 +104,7 @@ public class DAL {
         return null;
     }
 
+
     private static User jsonToUser(JSONObject json){
         User user = null;
         try{
@@ -106,7 +113,7 @@ public class DAL {
                     json.getString(Constant.DataBase.EMAIL),
                     json.getString(Constant.DataBase.PHONE),
                     json.getString(Constant.DataBase.LOCATION),
-                    json.getBoolean(Constant.DataBase.LAWYER));
+                    json.getInt(Constant.DataBase.LAWYER));
         }catch (Exception e){
             Log.d("Error", e.getMessage());
         }
