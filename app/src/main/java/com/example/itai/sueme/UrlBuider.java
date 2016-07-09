@@ -48,7 +48,7 @@ public class UrlBuider {
 
     public static String insertComment(Comment comment) {
         String toReturn = Constant.DataBase.URL;
-        toReturn += Action(Constant.DataBase.INSERT_CCOMMENT)
+        toReturn += Action(Constant.DataBase.INSERT_COMMENT)
                 + andEqual(Constant.DataBase.COMMENTOTOR_OR_DISPLAYNAME, comment.getCommentatorDisplayName())
                 + andEqual(Constant.DataBase.COMMENT_CONTENT, comment.getCommentContent())
                 + andEqual(Constant.DataBase.CREATOR_ID, String.valueOf(comment.getCommentatorID()));
