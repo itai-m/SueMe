@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 
 public class LoginActivity extends AppCompatActivity {
+    public static User ActiveUser = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

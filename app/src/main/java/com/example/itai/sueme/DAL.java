@@ -33,14 +33,15 @@ public class DAL {
 
     public int addUser(User user){
         String apiCall = UrlBuider.insertUser(user);
-
+        LoginActivity.ActiveUser = user;
         // Actions to do when succeeding
         Response.Listener<JSONObject> response = new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
                 try{
-                    Log.d("test", "" + response.getInt("id"));
+                    int id = response.getInt("id");
+                    LoginActivity.ActiveUser.setId(id);
                 } catch (Exception e){
 
                 }
