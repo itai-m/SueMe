@@ -23,7 +23,7 @@ public class DAL {
 
     public int addUser(User user){
         String url = Constant.DataBase.URL;
-        String apiCall = "?Action=insertUser&Name=%s&Email=%s&Phonenumber=%s&Location=%s&Lawyer=%d";
+        String apiCall = "Action=InsertUser&Name=%s&Email=%s&Phonenumber=%s&Location=%s&Lawyer=%d";
         int isLawyer = user.isLawyer() ? 1 : 0;
         String location = (user.getLocation().compareTo("Not found") == 0) ? "" : user.getLocation();
         apiCall = String.format(apiCall, user.getName(), user.getEmail(),  user.getPhonenumber(), location, isLawyer);
