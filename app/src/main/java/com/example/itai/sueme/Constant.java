@@ -31,6 +31,7 @@ public class Constant {
         public static final String INSERT_TAGS_TO_ARTICLE = "insertTagsToArticle";
         public static final String INSERT_CCOMMENT = "insertComment";
         public static final String GET_USER_BY_EMAIL = "getUserByEmail";
+        public static final String GET_COMMENT_BY_CREATOR_ID = "getCommentByCreatorID";
 
         public static final String ARTICLE_TITLE = "ArticleTitle";
         public static final String ARTICLE_CONTENT = "ArticleContent";

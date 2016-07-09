@@ -1,5 +1,6 @@
 package com.example.itai.sueme;
 
+
 /**
  * Created by Itai on 09/07/2016.
  */
@@ -54,10 +55,25 @@ public class UrlBuider {
         return toReturn;
     }
 
+
     public static String getUser(int id) {
         String toReturn = Constant.DataBase.URL;
         toReturn += Action(Constant.DataBase.GET_USER_BY_ID)
                 + andEqual(Constant.DataBase.ID, String.valueOf(id));
+        return toReturn;
+    }
+
+    public static String getUserByMail(String email) {
+        String toReturn = Constant.DataBase.URL;
+        toReturn += Action(Constant.DataBase.GET_USER_BY_EMAIL)
+                + andEqual(Constant.DataBase.EMAIL, email);
+        return toReturn;
+    }
+
+    public static String getCommentByCreatorID(int creatorID) {
+        String toReturn = Constant.DataBase.URL;
+        toReturn += Action(Constant.DataBase.GET_COMMENT_BY_CREATOR_ID)
+                + andEqual(Constant.DataBase.CREATOR_ID, String.valueOf(creatorID));
         return toReturn;
     }
 
@@ -68,5 +84,6 @@ public class UrlBuider {
     private static String Action(String action){
         return  Constant.DataBase.ACTION + EQUAL + action;
     }
+
 
 }
