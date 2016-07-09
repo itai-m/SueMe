@@ -22,9 +22,13 @@ public class DAL {
     }
 
     public int addUser(User user){
-        String url = String.format(Constant.DataBase.URL);
-        url = "http://sueme.berry-games.com/api.php?todo=insertUser&Name=[name]&Email=[Email]&Phonenumber=[phone]&Location=[Location]&Lawyer=0";
-        JSONObject json = getJson(url);
+        String url = Constant.DataBase.URL;
+        String apiCall = "?todo=insertUser&Name=%s&Email=%s&Phonenumber=%s&Location=%s&Lawyer=%d";
+        int isLawyer = user.isLawyer() ? 1 : 0;
+        String location = (user.getLocation().compareTo("Not found") == 0) ? "" : user.getLocation();
+        apiCall = String.format(apiCall, user.getName(), user.getEmail(),  user.getPhonenumber(), location, isLawyer);
+        String fullUrl = String.format("%s%s", url, apiCall);
+        JSONObject json = getJson(fullUrl);
         return 0;
     }
 

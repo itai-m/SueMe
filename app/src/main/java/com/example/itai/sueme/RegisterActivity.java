@@ -37,6 +37,8 @@ public class RegisterActivity extends AppCompatActivity {
         String phoneNumber = ((EditText) (findViewById(R.id.PhoneNumberText))).getText().toString();
         boolean isLawyer = (userType.compareTo("Lawyer") == 0) ? true : false;
         User userToRegister = new User(0, displayName, email, phoneNumber, currLocation, isLawyer);
+        DAL dal = new DAL();
+        dal.addUser(userToRegister);
     }
 
     public void onGetLocationClick(View v) {
