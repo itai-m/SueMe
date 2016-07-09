@@ -91,6 +91,20 @@ public class UrlBuider {
         return toReturn;
     }
 
+    public static String getLastArticle(int numberOfArticle) {
+        String toReturn = Constant.DataBase.URL;
+        toReturn += Action(Constant.DataBase.GET_LAST_ARTICLE)
+                + andEqual(Constant.DataBase.NUMBER, String.valueOf(numberOfArticle));
+        return toReturn;
+    }
+
+    public static String getCommentByArticleID(int articleID) {
+        String toReturn = Constant.DataBase.URL;
+        toReturn += Action(Constant.DataBase.GET_COMMENT_BY_ARTICLE_ID)
+                + andEqual(Constant.DataBase.ARTICLE_ID, String.valueOf(articleID));
+        return toReturn;
+    }
+
     private static String andEqual(String var, String res){
         return AND + var + EQUAL + res;
     }

@@ -21,6 +21,7 @@ public class Constant {
         public static final String LOCATION = "Location";
         public static final String LAWYER = "Lawyer";
         public static final String ID = "id";
+        public static final String NUMBER = "number";
 
         public static final String ACTION = "Action";
 
@@ -34,6 +35,8 @@ public class Constant {
         public static final String GET_COMMENT_BY_CREATOR_ID = "getCommentByCreatorID";
         public static final String GET_TAG_BY_ID = "getTagByID";
         public static final String GET_TAG_ID_BY_ARTICLE_ID = "getTagIdByArticleID";
+        public static final String GET_LAST_ARTICLE = "getLastArticle";
+        public static final String GET_COMMENT_BY_ARTICLE_ID = "getCommentByArticleID";
 
         public static final String ARTICLE_TITLE = "ArticleTitle";
         public static final String ARTICLE_CONTENT = "ArticleContent";
