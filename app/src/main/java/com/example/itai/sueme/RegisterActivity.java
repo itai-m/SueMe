@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,7 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        spinner = (ProgressBar)findViewById(R.id.progressBar);
+        spinner = (ProgressBar)findViewById(R.id.registerProgressBar);
     }
 
     public void onRegisterSubmitClick(View v) {
@@ -44,24 +46,26 @@ public class RegisterActivity extends AppCompatActivity {
         boolean isLawyer = (userType.compareTo("Lawyer") == 0) ? true : false;
         User userToRegister = new User(0, displayName, email, phoneNumber, currLocation, isLawyer);
         LoginActivity.ActiveUser = userToRegister;
-        DAL.addUser(userToRegister);
-        waitForUserInfo();
-        Intent homeIntent = new Intent(this, HomeActivity.class);
-        startActivity(homeIntent);
+        DAL.addUser(userToRegister, new DALCallback() {
+            @Override
+            public void callback() {
+                spinner.setVisibility(View.VISIBLE);
+                startActivityFromMainThread();
+            }
+        });
+        spinner.setVisibility(View.GONE);
     }
 
-    private void waitForUserInfo(){
-        spinner.setVisibility(View.VISIBLE);
-        try {
-            while (!LoginActivity.findUser) {
-                wait(500);
-            }
-        }catch (Exception e){
-            Log.d("Erorr", e.getMessage());
-            LoginActivity.findUser = false;
-        }
+    public void startActivityFromMainThread() {
 
-        spinner.setVisibility(View.GONE);
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
