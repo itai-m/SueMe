@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -35,7 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         CurrentActiveProfile = u;
-                        ((TextView)findViewById(R.id.ProfileDisplayName)).setText("Welcome, " + u.getName() + " !");
+                        ((TextView)findViewById(R.id.ProfileDisplayName)).setText("Profile for:  " + u.getName() + "");
                         ((TextView)findViewById(R.id.PhoneNumberProfileText)).setText(u.getPhonenumber());
                     }
                 });
@@ -43,6 +44,25 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
+    public void showLocationOnClick(View v) {
+        User u = CurrentActiveProfile;
+        try {
+            double latitude = Double.parseDouble(u.getLocationLatitude());
+            double longitude = Double.parseDouble(u.getLocationLatitude());
+            String label = u.getName() + "'s Location";
+            String uriBegin = "geo:" + latitude + "," + longitude;
+            String query = latitude + "," + longitude + "(" + label + ")";
+            String encodedQuery = Uri.encode(query);
+            String uriString = uriBegin + "?q=" + encodedQuery + "&z=16";
+            Uri uri = Uri.parse(uriString);
+            Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+        } catch (Exception e) {
+            Log.d("ShowLocation", e.toString());
+            return;
+        }
+
+    }
     public void onCallClick(View v) {
         String phoneNumber = ((TextView) findViewById(R.id.PhoneNumberProfileText)).getText().toString();
         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber));

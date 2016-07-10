@@ -17,7 +17,10 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 interface DALCallback {
     void callback();
@@ -168,7 +171,7 @@ public class DAL {
         getJsonArray(apiCall, response, error);
     }
 
-    public static void getCommets(int articleID, final DALCallback callback){
+    public static void getComments(int articleID, final DALCallback callback){
         String apiCall = UrlBuider.getCommentByArticleID(articleID);
         final DALCallback callbk = callback;
         // Actions to do when succeeding
@@ -327,11 +330,16 @@ public class DAL {
     private static Comment jsonToCommet(JSONObject json){
         Comment comment = null;
         try{
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //2016-07-10 13:20:32
+            Date date = sdf.parse(json.getString(Constant.DataBase.COMMENT_PUBLIICATION_DATE));
+
             comment = new Comment(json.getInt(Constant.DataBase.ID),
                     json.getInt(Constant.DataBase.CREATOR_ID),
                     json.getString(Constant.DataBase.COMMENTOTOR_OR_DISPLAYNAME),
                     json.getString(Constant.DataBase.COMMENT_CONTENT),
-                    json.getInt(Constant.DataBase.ARTICLE_ID));
+                    json.getInt(Constant.DataBase.ARTICLE_ID),
+                    date);
         }catch (Exception e){
             Log.d("Error", e.getMessage());
         }

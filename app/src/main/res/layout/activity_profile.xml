@@ -44,8 +44,9 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Get Location"
+            android:text="Show location"
             android:id="@+id/GetLocationProfileButton"
+            android:onClick="showLocationOnClick"
             android:layout_marginLeft="25dp" />
     </LinearLayout>
 

@@ -19,7 +19,7 @@ public class Constant {
         public static final String EMAIL = "Email";
         public static final String PHONE = "Phonenumber";
         public static final String LOCATION_LAT = "LocationLat";
-        public static final String LOCATION_LONG = "LocatoinLong";
+        public static final String LOCATION_LONG = "LocationLong";
         public static final String LAWYER = "Lawyer";
         public static final String ID = "id";
         public static final String NUMBER = "number";
@@ -51,6 +51,7 @@ public class Constant {
 
         public static final String COMMENTOTOR_OR_DISPLAYNAME = "CommentatorDisplayName";
         public static final String COMMENT_CONTENT = "CommentContent";
+        public static final String COMMENT_PUBLIICATION_DATE = "Date";
 
 
     }

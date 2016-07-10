@@ -1,10 +1,13 @@
 package com.example.itai.sueme;
 
+import java.util.Date;
+
 /**
  * Created by nadav on 7/7/2016.
  */
 public class Comment {
 
+    private Date PublishDate;
     private int CommentID;                      // ID of Comment from DB.
     private int CommentatorID;                  // ID of commentator.
     private String CommentatorDisplayName;      // Display name of commentator.
@@ -13,12 +16,21 @@ public class Comment {
 
     /* Constructors */
 
-    public Comment(int commentID, int commentatorID, String commentatorDisplayName, String commentContent, int articleID) {
+    public Comment(int commentID, int commentatorID, String commentatorDisplayName, String commentContent, int articleID, Date publishDate) {
         CommentID = commentID;
         CommentatorID = commentatorID;
         CommentatorDisplayName = commentatorDisplayName;
         CommentContent = commentContent;
         ArticleID = articleID;
+        PublishDate = publishDate;
+    }
+
+    public Date getPublishDate() {
+        return PublishDate;
+    }
+
+    public void setPublishDate(Date publishDate) {
+        PublishDate = publishDate;
     }
 
     /* Getters */

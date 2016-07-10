@@ -26,12 +26,21 @@
         android:layout_height="wrap_content"
         android:text="Article content goes here Article content goes here Article content goes here Article content goes here Article content goes hereArticle content goes here Article content goes here Article content goes here Article content goes here Article content goes hereArticle content goes here Article content goes here Article content goes here Article content goes here Article content goes here"
         android:id="@+id/ArticleContentText"
-        android:textSize="17dp" />
+        android:textSize="17dp"
+        android:layout_weight="0.41" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Comments"
+        android:id="@+id/CommentsTextLabel"
+        android:textSize="25dp" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="123dp"
-        android:id="@+id/CommentsArticleListView" />
+        android:id="@+id/CommentsArticleListView"
+        android:layout_weight="0.31" />
 
     <Button
         android:layout_width="wrap_content"

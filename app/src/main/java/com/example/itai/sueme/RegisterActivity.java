@@ -25,6 +25,7 @@ import android.widget.ToggleButton;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.RunnableFuture;
 
 public class RegisterActivity extends AppCompatActivity {
     boolean location_disabled = false;
@@ -97,7 +98,15 @@ public class RegisterActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             return;
         }
-        GetLocation();
+
+        // Get location on different thread, not to stuck the program.
+        Thread t = new Thread(new Runnable() {
+            public void run() {
+                GetLocation();
+            }
+        });
+
+        t.start();
     }
 
     private void GetLocation() {
@@ -112,11 +121,16 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
         Location l = locationManager.getLastKnownLocation(locationManager.getBestProvider(new Criteria(), false));
-        String lklStr;
+        final String lklStr;
         if (l == null)
         {
             lklStr = "None";
-            Toast.makeText(this, "Can't get last known location.", Toast.LENGTH_LONG ).show();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(RegisterActivity.this, "Can't get last known location.", Toast.LENGTH_LONG ).show();
+                }
+            });
         }
         else
         {
@@ -135,12 +149,22 @@ public class RegisterActivity extends AppCompatActivity {
             }
             else {
                 lklStr = "None";
-                Toast.makeText(this, "Cant resolve address", Toast.LENGTH_LONG ).show();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(RegisterActivity.this, "Cant resolve address", Toast.LENGTH_LONG).show();
+                    }
+                });
+
             }
         }
 
-
-        ((TextView) (findViewById(R.id.CurrentLocationTextview))).setText(lklStr);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ((TextView) (findViewById(R.id.CurrentLocationTextview))).setText(lklStr);
+            }
+        });
     }
 
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
