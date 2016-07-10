@@ -101,6 +101,13 @@ public class UrlBuider {
         return toReturn;
     }
 
+    public static String getLastArticleByUserID(int numberOfArticles, int userId) {
+        String toReturn = Constant.DataBase.URL;
+        toReturn += Action(Constant.DataBase.GET_LAST_ARTICLE_BY_USER_ID)
+                + andEqual(Constant.DataBase.NUMBER, String.valueOf(numberOfArticles)
+                + andEqual(Constant.DataBase.CREATOR_ID, String.valueOf(userId)));
+        return toReturn;
+    }
     public static String getCommentByArticleID(int articleID) {
         String toReturn = Constant.DataBase.URL;
         toReturn += Action(Constant.DataBase.GET_COMMENT_BY_ARTICLE_ID)

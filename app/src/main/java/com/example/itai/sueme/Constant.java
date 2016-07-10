@@ -37,6 +37,7 @@ public class Constant {
         public static final String GET_TAG_BY_ID = "getTagByID";
         public static final String GET_TAG_ID_BY_ARTICLE_ID = "getTagIdByArticleID";
         public static final String GET_LAST_ARTICLE = "getLastArticle";
+        public static final String GET_LAST_ARTICLE_BY_USER_ID = "getLastArticleByUserID";
         public static final String GET_COMMENT_BY_ARTICLE_ID = "getCommentByArticleID";
         public static final String SEARCH_ARTICLE_IN_TITLE = "searchArticleInTitle";
 

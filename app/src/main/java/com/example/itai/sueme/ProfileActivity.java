@@ -5,12 +5,18 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 /**
  * Created by nadav on 7/9/2016.
@@ -18,6 +24,11 @@ import android.widget.Toast;
 public class ProfileActivity extends AppCompatActivity {
     static boolean PhoneCallPermission = true;
     static User CurrentActiveProfile = null;
+    private static final int NUMBER_OF_ARTICLES = 5;
+
+    static ArrayList<Article> articles = new ArrayList<Article>();
+    ArticleListViewAdapter arrayAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,8 +36,38 @@ public class ProfileActivity extends AppCompatActivity {
         // Get current profile id
         Intent mIntent = getIntent();
         int profileId = mIntent.getIntExtra("profileId", 0);
+        // Populate the profile page.
         PopulateProfilePage(profileId);
+    }
 
+    private void PopulateListView() {
+        ListView lv = (ListView) findViewById(R.id.ArticleListProfileListView);
+        arrayAdapter = new ArticleListViewAdapter(
+                this,
+                articles );
+        lv.setAdapter(arrayAdapter);
+        // Set the onclick listener.
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Article article = (Article) parent.getAdapter().getItem(position);
+                ArticleActivity.article = article;
+                startArticleActivityFromMainThread(article.getArticleID());
+            }
+        });
+    }
+
+    public void startArticleActivityFromMainThread(final int articleId) {
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(ProfileActivity.this, ArticleActivity.class);
+                intent.putExtra("articleId", articleId);
+                startActivity(intent);
+            }
+        });
     }
 
     private void PopulateProfilePage(int profileId) {
@@ -39,6 +80,13 @@ public class ProfileActivity extends AppCompatActivity {
                         CurrentActiveProfile = u;
                         ((TextView)findViewById(R.id.ProfileDisplayName)).setText("Profile for:  " + u.getName() + "");
                         ((TextView)findViewById(R.id.PhoneNumberProfileText)).setText(u.getPhonenumber());
+                        // Load the latest articles.
+                        DAL.getLastArticlesByUserId(NUMBER_OF_ARTICLES, u.getId() ,new DALCallback() {
+                            @Override
+                            public void callback() {
+                                PopulateListView();
+                            }
+                        });
                     }
                 });
             }
@@ -52,7 +100,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
         try {
             double latitude = Double.parseDouble(u.getLocationLatitude());
-            double longitude = Double.parseDouble(u.getLocationLatitude());
+            double longitude = Double.parseDouble(u.getLocationLongtitude());
             String label = u.getName() + "'s Location";
             String uriBegin = "geo:" + latitude + "," + longitude;
             String query = latitude + "," + longitude + "(" + label + ")";

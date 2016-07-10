@@ -1,6 +1,7 @@
 package com.example.itai.sueme;
 
 
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -105,6 +106,38 @@ public class DAL {
         };
         getJsonObject(apiCall, response, error);
 
+    }
+
+    public static void getLastArticlesByUserId(int number, int userid, final DALCallback callback){
+        String apiCall = UrlBuider.getLastArticleByUserID(number, userid);
+        final DALCallback callbk = callback;
+        // Actions to do when succeeding
+        Response.Listener<JSONArray> response = new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try{
+                    ProfileActivity.articles = new ArrayList<Article>();
+                    for (int i=0; i < response.length(); i++){
+                        ProfileActivity.articles.add(jsonToArticle(response.getJSONObject(i)));
+                    }
+                    if (callbk != null) {
+                        callbk.callback();
+                    }
+                } catch (Exception e){
+                    Log.d("Error", e.getMessage());
+                }
+            }
+        };
+
+        // Actions to do when faililng:
+        Response.ErrorListener error = new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error", error.getMessage());
+            }
+        };
+        getJsonArray(apiCall, response, error);
     }
 
     public static void getLastArticle(int numer, final DALCallback callback){
