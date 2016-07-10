@@ -37,12 +37,6 @@ public class DAL {
     public static void publishArticle(Article article, final DALCallback callback) {
         String apiCall = UrlBuider.insertArticle(article);
         final DALCallback callbk = callback;
-        try {
-            URI uri = new URI(apiCall.replace(" ", "%20"));
-            apiCall = uri.toString();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
         // Actions to do when succeeding
         Response.Listener<JSONObject> response = new Response.Listener<JSONObject>() {
 
@@ -74,12 +68,6 @@ public class DAL {
     public static void publishComment(Comment comment, final DALCallback callback) {
         String apiCall = UrlBuider.insertComment(comment);
         final DALCallback callbk = callback;
-        try {
-            URI uri = new URI(apiCall.replace(" ", "%20"));
-            apiCall = uri.toString();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
         // Actions to do when succeeding
         Response.Listener<JSONObject> response = new Response.Listener<JSONObject>() {
 

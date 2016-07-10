@@ -69,6 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void callback() {
                 startActivityFromMainThread();
+                spinner.setVisibility(View.GONE);
             }
         });
         spinner.setVisibility(View.VISIBLE);
@@ -95,7 +96,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             return;
         }
 
