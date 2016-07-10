@@ -7,21 +7,32 @@
     android:orientation="vertical"
     android:weightSum="1">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Article Name"
-        android:id="@+id/ArticleNameText"
-        android:textSize="25dp" />
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:orientation="horizontal"
+        android:weightSum="1">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Author Name"
-        android:id="@+id/AuthorNameText"
-        android:textSize="20dp"
-        android:onClick="authorNameOnClick"
-        android:clickable="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Article Name"
+            android:id="@+id/ArticleNameText"
+            android:textSize="25dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Author Name"
+            android:id="@+id/AuthorNameText"
+            android:textSize="20dp"
+            android:onClick="authorNameOnClick"
+            android:clickable="true"
+            android:layout_marginLeft="25dp" />
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"

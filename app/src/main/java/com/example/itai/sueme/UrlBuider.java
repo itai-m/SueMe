@@ -1,8 +1,10 @@
 package com.example.itai.sueme;
 
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URLEncoder;
 
 
 public class UrlBuider {
@@ -25,11 +27,15 @@ public class UrlBuider {
     }
     public static String insertArticle(Article article){
         String toReturn = Constant.DataBase.URL;
-        toReturn += Action(Constant.DataBase.INSERT_ARTICLE)
-                + andEqual(Constant.DataBase.ARTICLE_TITLE, article.getArticleTitle())
-                + andEqual(Constant.DataBase.ARTICLE_CONTENT, article.getArticleContent())
-                + andEqual(Constant.DataBase.CREATOR_ID, String.valueOf(article.getCreatorID())
-                + andEqual(Constant.DataBase.CREATOR_DISPLAY_NAME, article.getCreatorDisplayName()));
+        try {
+            toReturn += Action(Constant.DataBase.INSERT_ARTICLE)
+                    + andEqual(Constant.DataBase.ARTICLE_TITLE, URLEncoder.encode(article.getArticleTitle(),"UTF-8"))
+                    + andEqual(Constant.DataBase.ARTICLE_CONTENT, URLEncoder.encode(article.getArticleContent(),"UTF-8"))
+                    + andEqual(Constant.DataBase.CREATOR_ID, String.valueOf(article.getCreatorID())
+                    + andEqual(Constant.DataBase.CREATOR_DISPLAY_NAME, article.getCreatorDisplayName()));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         return urlFix(toReturn);
     }
 
@@ -51,11 +57,15 @@ public class UrlBuider {
 
     public static String insertComment(Comment comment) {
         String toReturn = Constant.DataBase.URL;
-        toReturn += Action(Constant.DataBase.INSERT_COMMENT)
-                + andEqual(Constant.DataBase.COMMENTOTOR_OR_DISPLAYNAME, comment.getCommentatorDisplayName())
-                + andEqual(Constant.DataBase.COMMENT_CONTENT, comment.getCommentContent())
-                + andEqual(Constant.DataBase.CREATOR_ID, String.valueOf(comment.getCommentatorID())
-                + andEqual(Constant.DataBase.ARTICLE_ID, String.valueOf(comment.getArticleID())));
+        try {
+            toReturn += Action(Constant.DataBase.INSERT_COMMENT)
+                    + andEqual(Constant.DataBase.COMMENTOTOR_OR_DISPLAYNAME, comment.getCommentatorDisplayName())
+                    + andEqual(Constant.DataBase.COMMENT_CONTENT, URLEncoder.encode(comment.getCommentContent(),"UTF-8"))
+                    + andEqual(Constant.DataBase.CREATOR_ID, String.valueOf(comment.getCommentatorID())
+                    + andEqual(Constant.DataBase.ARTICLE_ID, String.valueOf(comment.getArticleID())));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         return urlFix(toReturn);
     }
 
