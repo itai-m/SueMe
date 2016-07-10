@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by nadav on 7/9/2016.
@@ -46,6 +47,9 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void showLocationOnClick(View v) {
         User u = CurrentActiveProfile;
+        if (u.getLocationLatitude().isEmpty() || u.getLocationLongtitude().isEmpty()) {
+            Toast.makeText(this, "Location not set for this user.", Toast.LENGTH_LONG).show();
+        }
         try {
             double latitude = Double.parseDouble(u.getLocationLatitude());
             double longitude = Double.parseDouble(u.getLocationLatitude());

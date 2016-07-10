@@ -76,6 +76,11 @@ public class ArticleActivity extends AppCompatActivity {
         });
     }
 
+    public void authorNameOnClick(View v) {
+        startProfileActivityFromMainThread(article.getCreatorID());
+    }
+
+
     public void startProfileActivityFromMainThread(final int profileId) {
 
         Handler handler = new Handler(Looper.getMainLooper());

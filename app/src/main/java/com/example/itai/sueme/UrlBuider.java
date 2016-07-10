@@ -27,7 +27,8 @@ public class UrlBuider {
         toReturn += Action(Constant.DataBase.INSERT_ARTICLE)
                 + andEqual(Constant.DataBase.ARTICLE_TITLE, article.getArticleTitle())
                 + andEqual(Constant.DataBase.ARTICLE_CONTENT, article.getArticleContent())
-                + andEqual(Constant.DataBase.CREATOR_ID, String.valueOf(article.getCreatorID()));
+                + andEqual(Constant.DataBase.CREATOR_ID, String.valueOf(article.getCreatorID())
+                + andEqual(Constant.DataBase.CREATOR_DISPLAY_NAME, article.getCreatorDisplayName()));
         return toReturn;
     }
 
