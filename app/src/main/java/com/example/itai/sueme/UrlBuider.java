@@ -17,11 +17,11 @@ public class UrlBuider {
                 + andEqual(Constant.DataBase.NAME, user.getName())
                 + andEqual(Constant.DataBase.EMAIL, user.getEmail())
                 + andEqual(Constant.DataBase.PHONE, user.getPhonenumber())
-                + andEqual(Constant.DataBase.LOCATION, user.getLocation())
+                + andEqual(Constant.DataBase.LOCATION_LAT, user.getLocationLatitude())
+                + andEqual(Constant.DataBase.LOCATION_LONG, user.getLocationLongtitude())
                 + andEqual(Constant.DataBase.LAWYER, user.isLawyer() ? TRUE : FALSE);
         return toReturn;
     }
-
     public static String insertArticle(Article article){
         String toReturn = Constant.DataBase.URL;
         toReturn += Action(Constant.DataBase.INSERT_ARTICLE)
@@ -52,7 +52,8 @@ public class UrlBuider {
         toReturn += Action(Constant.DataBase.INSERT_COMMENT)
                 + andEqual(Constant.DataBase.COMMENTOTOR_OR_DISPLAYNAME, comment.getCommentatorDisplayName())
                 + andEqual(Constant.DataBase.COMMENT_CONTENT, comment.getCommentContent())
-                + andEqual(Constant.DataBase.CREATOR_ID, String.valueOf(comment.getCommentatorID()));
+                + andEqual(Constant.DataBase.CREATOR_ID, String.valueOf(comment.getCommentatorID())
+                + andEqual(Constant.DataBase.ARTICLE_ID, String.valueOf(comment.getArticleID())));
         return toReturn;
     }
 

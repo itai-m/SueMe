@@ -6,25 +6,44 @@ public class User {
     private String Name;
     private String Email;
     private String Phonenumber;
-    private String Location;
+    private String LocationLatitude;
+    private String LocationLongtitude;
     private boolean Lawyer;
 
-    public User(int id, String name, String email, String phonenumber, String location, boolean lawyer) {
-        Id = id;
-        Name = name;
-        Email = email;
-        Phonenumber = phonenumber;
-        Location = location;
-        Lawyer = lawyer;
+    public String getLocationLatitude() {
+        return LocationLatitude;
     }
 
-    public User(int id, String name, String email, String phonenumber, String location, int lawyer) {
+    public void setLocationLatitude(String locationLatitude) {
+        LocationLatitude = locationLatitude;
+    }
+
+    public String getLocationLongtitude() {
+        return LocationLongtitude;
+    }
+
+    public void setLocationLongtitude(String locationLongtitude) {
+        LocationLongtitude = locationLongtitude;
+    }
+
+    public User(int id, String name, String email, String phonenumber, String locationLat, String locationLong, boolean lawyer) {
         Id = id;
         Name = name;
         Email = email;
         Phonenumber = phonenumber;
-        Location = location;
+        Lawyer = lawyer;
+        LocationLatitude = locationLat;
+        LocationLongtitude = locationLong;
+    }
+
+    public User(int id, String name, String email, String phonenumber, String locationLat, String locationLong, int lawyer) {
+        Id = id;
+        Name = name;
+        Email = email;
+        Phonenumber = phonenumber;
         Lawyer = (lawyer == 1) ? true: false;
+        LocationLatitude = locationLat;
+        LocationLongtitude = locationLong;
     }
     public int getId() {
         return Id;
@@ -46,9 +65,6 @@ public class User {
         return Phonenumber;
     }
 
-    public String getLocation() {
-        return Location;
-    }
 
     public boolean isLawyer() {
         return Lawyer;
@@ -64,10 +80,6 @@ public class User {
 
     public void setPhonenumber(String phonenumber) {
         Phonenumber = phonenumber;
-    }
-
-    public void setLocation(String location) {
-        Location = location;
     }
 
     public void setLawyer(boolean lawyer) {

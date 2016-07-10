@@ -38,6 +38,7 @@
         android:layout_height="34dp"
         android:text="Publish comment"
         android:id="@+id/NewCommentButton"
+        android:onClick="publishCommentOnClick"
         android:layout_gravity="center_horizontal" />
 
     <EditText

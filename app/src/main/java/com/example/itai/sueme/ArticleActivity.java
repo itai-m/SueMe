@@ -75,4 +75,10 @@ public class ArticleActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void publishCommentOnClick(View v) {
+        String commentContent = ((TextView) findViewById(R.id.WriteCommentTextField)).getText().toString();
+        Comment comment = new Comment(-1, LoginActivity.ActiveUser.getId(), LoginActivity.ActiveUser.getName() , commentContent, article.getArticleID());
+        DAL.publishComment(comment, null);
+    }
 }

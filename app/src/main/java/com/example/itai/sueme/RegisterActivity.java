@@ -4,7 +4,9 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
 import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Handler;
@@ -20,10 +22,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
 public class RegisterActivity extends AppCompatActivity {
     boolean location_disabled = false;
     private ProgressBar spinner;
-
+    private Location location = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,10 +48,21 @@ public class RegisterActivity extends AppCompatActivity {
         ToggleButton tg = (ToggleButton) findViewById(R.id.toggleButton);
         // If toggle button on = lawyer, else it's a regular user.
         String userType = tg.getText().toString();
-        String currLocation = ((TextView) (findViewById(R.id.CurrentLocationTextview))).getText().toString();
         String phoneNumber = ((EditText) (findViewById(R.id.PhoneNumberText))).getText().toString();
         boolean isLawyer = (userType.compareTo("Lawyer") == 0) ? true : false;
-        User userToRegister = new User(0, displayName, email, phoneNumber, currLocation, isLawyer);
+        String currLocationLat;
+        String currLocationLong;
+        if (location == null) {
+            currLocationLat = "";
+            currLocationLong = "";
+        }
+        else {
+             currLocationLat = String.valueOf(location.getLatitude());
+             currLocationLong = String.valueOf(location.getLongitude());
+        }
+
+
+        User userToRegister = new User(0, displayName, email, phoneNumber, currLocationLat, currLocationLong , isLawyer);
         LoginActivity.ActiveUser = userToRegister;
         DAL.addUser(userToRegister, new DALCallback() {
             @Override
@@ -98,12 +115,31 @@ public class RegisterActivity extends AppCompatActivity {
         String lklStr;
         if (l == null)
         {
-            lklStr = "Not found";
+            lklStr = "None";
+            Toast.makeText(this, "Can't get last known location.", Toast.LENGTH_LONG ).show();
         }
         else
         {
-            lklStr = l.toString();
+            location = l;
+            Geocoder geocoder;
+            List<Address> addresses = null;
+            geocoder = new Geocoder(this, Locale.getDefault());
+
+            try {
+                addresses = geocoder.getFromLocation(l.getLatitude(), l.getLongitude(), 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (addresses != null) {
+                lklStr = addresses.get(0).getAddressLine(0);
+            }
+            else {
+                lklStr = "None";
+                Toast.makeText(this, "Cant resolve address", Toast.LENGTH_LONG ).show();
+            }
         }
+
+
         ((TextView) (findViewById(R.id.CurrentLocationTextview))).setText(lklStr);
     }
 

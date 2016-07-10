@@ -18,7 +18,8 @@ public class Constant {
         public static final String NAME = "Name";
         public static final String EMAIL = "Email";
         public static final String PHONE = "Phonenumber";
-        public static final String LOCATION = "Location";
+        public static final String LOCATION_LAT = "LocationLat";
+        public static final String LOCATION_LONG = "LocatoinLong";
         public static final String LAWYER = "Lawyer";
         public static final String ID = "id";
         public static final String NUMBER = "number";

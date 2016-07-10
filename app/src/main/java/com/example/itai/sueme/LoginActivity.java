@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
     public static User ActiveUser = null;
@@ -35,8 +36,15 @@ public class LoginActivity extends AppCompatActivity {
             public void callback() {
                 String pass = ((EditText) (findViewById(R.id.passwordField))).getText().toString();
                 if (true) {
-                    // TODO: need to add password Check
-                    startHomeActivityFromMainThread();
+                    if (ActiveUser == null) {
+                        // Error occured during fetching of the user.
+                        Toast.makeText(LoginActivity.this, "Error occured when trying to fetch user.", Toast.LENGTH_LONG).show();
+                        spinner.setVisibility(View.GONE);
+                    }
+                    else {
+                        startHomeActivityFromMainThread();
+                    }
+
                 }
             }
         });

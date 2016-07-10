@@ -14,6 +14,9 @@ import com.android.volley.toolbox.RequestFuture;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 interface DALCallback {
@@ -25,6 +28,81 @@ interface DALCallbackUserObject {
 }
 
 public class DAL {
+
+
+    public static void publishArticle(Article article, final DALCallback callback) {
+        String apiCall = UrlBuider.insertArticle(article);
+        final DALCallback callbk = callback;
+        try {
+            URI uri = new URI(apiCall.replace(" ", "%20"));
+            apiCall = uri.toString();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        // Actions to do when succeeding
+        Response.Listener<JSONObject> response = new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                try{
+                    int id = response.getInt("id");
+                    if (callbk != null) {
+                        callbk.callback();
+                    }
+                } catch (Exception e){
+                    Log.d("PublishArticle", e.toString());
+                }
+            }
+        };
+
+        // Actions to do when faililng:
+        Response.ErrorListener error = new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("PublishArticle", error.toString());
+            }
+        };
+        getJsonObject(apiCall, response, error);
+
+    }
+
+    public static void publishComment(Comment comment, final DALCallback callback) {
+        String apiCall = UrlBuider.insertComment(comment);
+        final DALCallback callbk = callback;
+        try {
+            URI uri = new URI(apiCall.replace(" ", "%20"));
+            apiCall = uri.toString();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        // Actions to do when succeeding
+        Response.Listener<JSONObject> response = new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                try{
+                    int id = response.getInt("id");
+                    if (callbk != null) {
+                        callbk.callback();
+                    }
+                } catch (Exception e){
+                    Log.d("InsertComment", e.toString());
+                }
+            }
+        };
+
+        // Actions to do when faililng:
+        Response.ErrorListener error = new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("InsertComment", error.toString());
+            }
+        };
+        getJsonObject(apiCall, response, error);
+
+    }
 
     public static void getLastArticle(int numer, final DALCallback callback){
         String apiCall = UrlBuider.getLastArticle(numer);
@@ -223,7 +301,8 @@ public class DAL {
                     json.getString(Constant.DataBase.NAME),
                     json.getString(Constant.DataBase.EMAIL),
                     json.getString(Constant.DataBase.PHONE),
-                    json.getString(Constant.DataBase.LOCATION),
+                    json.getString(Constant.DataBase.LOCATION_LAT),
+                    json.getString(Constant.DataBase.LOCATION_LONG),
                     json.getInt(Constant.DataBase.LAWYER));
         }catch (Exception e){
             Log.d("Error", e.getMessage());
