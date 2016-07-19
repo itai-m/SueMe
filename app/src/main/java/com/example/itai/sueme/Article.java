@@ -1,8 +1,5 @@
 package com.example.itai.sueme;
 
-/**
- * Created by nadav on 7/7/2016.
- */
 public class Article {
     /* Class variables */
     private int ArticleID;              // ID in the database.

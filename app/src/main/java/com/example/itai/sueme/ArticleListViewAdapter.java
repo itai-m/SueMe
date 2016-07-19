@@ -9,9 +9,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by nadav on 7/9/2016.
- */
 public class ArticleListViewAdapter extends ArrayAdapter<Article> {
     public ArticleListViewAdapter(Context context, ArrayList<Article> articles) {
         super(context, 0, articles);

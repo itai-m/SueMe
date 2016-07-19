@@ -18,13 +18,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by nadav on 7/9/2016.
- */
 public class HomeActivity extends AppCompatActivity {
     private static final int NUMBER_OF_ARTICLES = 5;
     static ArrayList<Article> articles = new ArrayList<Article>();
     ArticleListViewAdapter arrayAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +38,7 @@ public class HomeActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.WelcomeHomeText)).setText("Welcome, " + name + "!");
     }
 
-
+    //populate the view with the articles
     private void PopulateListView() {
         ListView lv = (ListView) findViewById(R.id.ArticleHomeListView);
         arrayAdapter = new ArticleListViewAdapter(
@@ -75,6 +73,8 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+
+    //search article by name in the db
     public void sharchArticle(View v) {
         String name = ((EditText) (findViewById(R.id.SearchArticleHomeEditText))).getText().toString();
         DAL.getArticleByName(name, new DALCallback() {

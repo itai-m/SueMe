@@ -15,14 +15,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 
-/**
- * Created by nadav on 7/9/2016.
- */
 public class ArticleActivity extends AppCompatActivity {
 
     static Article article = null;
     static ArrayList<Comment> comments = null;
     CommentListViewAdapter arrayAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         comments = new ArrayList<Comment>();
@@ -32,13 +30,14 @@ public class ArticleActivity extends AppCompatActivity {
         PopulateComments();
 
     }
-
+    //set the article information to the view
     private void PopulateArticle(){
         ((TextView)findViewById(R.id.ArticleNameText)).setText(article.getArticleTitle());
         ((TextView)findViewById(R.id.AuthorNameText)).setText(article.getCreatorDisplayName());
         ((TextView)findViewById(R.id.ArticleContentText)).setText(article.getArticleContent());
     }
 
+    //get all the post from the db
     private void PopulateComments() {
         comments = null;
         DAL.getComments(article.getArticleID(), new DALCallback() {
@@ -50,6 +49,7 @@ public class ArticleActivity extends AppCompatActivity {
 
     }
 
+    //populate the view with the comments
     private void PopulateCommentsInner() {
         ListView lv = (ListView) findViewById(R.id.CommentsArticleListView);
         arrayAdapter = new CommentListViewAdapter(

@@ -10,22 +10,6 @@ public class User {
     private String LocationLongtitude;
     private boolean Lawyer;
 
-    public String getLocationLatitude() {
-        return LocationLatitude;
-    }
-
-    public void setLocationLatitude(String locationLatitude) {
-        LocationLatitude = locationLatitude;
-    }
-
-    public String getLocationLongtitude() {
-        return LocationLongtitude;
-    }
-
-    public void setLocationLongtitude(String locationLongtitude) {
-        LocationLongtitude = locationLongtitude;
-    }
-
     public User(int id, String name, String email, String phonenumber, String locationLat, String locationLong, boolean lawyer) {
         Id = id;
         Name = name;
@@ -45,12 +29,10 @@ public class User {
         LocationLatitude = locationLat;
         LocationLongtitude = locationLong;
     }
+
+    /* Getters */
     public int getId() {
         return Id;
-    }
-
-    public void setId(int id) {
-        Id = id;
     }
 
     public String getName() {
@@ -65,9 +47,21 @@ public class User {
         return Phonenumber;
     }
 
+    public String getLocationLongtitude() {
+        return LocationLongtitude;
+    }
+
+    public String getLocationLatitude() {
+        return LocationLatitude;
+    }
 
     public boolean isLawyer() {
         return Lawyer;
+    }
+
+    /* Setters */
+    public void setId(int id) {
+        Id = id;
     }
 
     public void setName(String name) {
@@ -86,4 +80,11 @@ public class User {
         Lawyer = lawyer;
     }
 
+    public void setLocationLongtitude(String locationLongtitude) {
+        LocationLongtitude = locationLongtitude;
+    }
+
+    public void setLocationLatitude(String locationLatitude) {
+        LocationLatitude = locationLatitude;
+    }
 }

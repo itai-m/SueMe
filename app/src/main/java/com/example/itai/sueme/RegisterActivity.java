@@ -39,6 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         spinner.setVisibility(View.GONE);
     }
 
+    //submit all the user info to the db
     public void onRegisterSubmitClick(View v) {
         // Aggregate data from all the fields.
         // If nothing has been entered, string is "".
@@ -88,6 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
+
     public void onGetLocationClick(View v) {
         if (location_disabled == true)
         {
@@ -110,6 +112,7 @@ public class RegisterActivity extends AppCompatActivity {
         t.start();
     }
 
+    //get the location of the user from the gps
     private void GetLocation() {
         if (location_disabled == true)
         {

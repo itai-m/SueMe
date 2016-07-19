@@ -34,6 +34,7 @@ interface DALCallbackUserObject {
 public class DAL {
 
 
+    //publish an Article to the db
     public static void publishArticle(Article article, final DALCallback callback) {
         String apiCall = UrlBuider.insertArticle(article);
         final DALCallback callbk = callback;
@@ -65,6 +66,7 @@ public class DAL {
 
     }
 
+    //publish a comment to the db
     public static void publishComment(Comment comment, final DALCallback callback) {
         String apiCall = UrlBuider.insertComment(comment);
         final DALCallback callbk = callback;
@@ -96,6 +98,7 @@ public class DAL {
 
     }
 
+    //get the last articles publish a user, number of articles is determent variable number
     public static void getLastArticlesByUserId(int number, int userid, final DALCallback callback){
         String apiCall = UrlBuider.getLastArticleByUserID(number, userid);
         final DALCallback callbk = callback;
@@ -128,6 +131,7 @@ public class DAL {
         getJsonArray(apiCall, response, error);
     }
 
+    //get the last articles, number of articles is determent variable number
     public static void getLastArticle(int numer, final DALCallback callback){
         String apiCall = UrlBuider.getLastArticle(numer);
         final DALCallback callbk = callback;
@@ -160,6 +164,7 @@ public class DAL {
         getJsonArray(apiCall, response, error);
     }
 
+    //get article by name
     public static void getArticleByName(String name, final DALCallback callback){
         String apiCall = UrlBuider.searchArticleInTitle(name);
         final DALCallback callbk = callback;
@@ -192,6 +197,7 @@ public class DAL {
         getJsonArray(apiCall, response, error);
     }
 
+    //get all the comments of one article
     public static void getComments(int articleID, final DALCallback callback){
         String apiCall = UrlBuider.getCommentByArticleID(articleID);
         final DALCallback callbk = callback;
@@ -224,6 +230,7 @@ public class DAL {
         getJsonArray(apiCall, response, error);
     }
 
+    //add user to the db
     public static int addUser(User user, final DALCallback callback){
         String apiCall = UrlBuider.insertUser(user);
         LoginActivity.ActiveUser = user;
@@ -257,6 +264,7 @@ public class DAL {
         return 0;
     }
 
+    //get user by id
     public static User getUserByID (int id, final DALCallbackUserObject callback){
         String apiCall = UrlBuider.getUser(id);
 
@@ -287,6 +295,7 @@ public class DAL {
         return null;
     }
 
+    //get user by mail
     public static User getUserByEmail (String email, final DALCallback callback){
         String apiCall = UrlBuider.getUserByMail(email);
         final DALCallback callbk = callback;
@@ -317,7 +326,7 @@ public class DAL {
         return null;
     }
 
-
+    //get user from json
     private static User jsonToUser(JSONObject json){
         User user = null;
         try{
@@ -334,6 +343,7 @@ public class DAL {
         return user;
     }
 
+    //get article from json
     private static Article jsonToArticle(JSONObject json){
         Article article = null;
         try{
@@ -348,6 +358,7 @@ public class DAL {
         return article;
     }
 
+    //get comment from json
     private static Comment jsonToCommet(JSONObject json){
         Comment comment = null;
         try{
@@ -367,6 +378,7 @@ public class DAL {
         return comment;
     }
 
+    //get jsonObject from url
     private static JSONObject getJsonObject(String url, Response.Listener<JSONObject> responseCallback, Response.ErrorListener errCallback){
         JSONObject toReturn;
         JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, responseCallback, errCallback);
@@ -374,6 +386,7 @@ public class DAL {
         return null;
     }
 
+    //get jsonArray from url
     private static JSONArray getJsonArray(String url, Response.Listener<JSONArray> responseCallback, Response.ErrorListener errCallback) {
         JSONObject toReturn;
         JsonArrayRequest jsArrRequest = new JsonArrayRequest(url, responseCallback, errCallback);

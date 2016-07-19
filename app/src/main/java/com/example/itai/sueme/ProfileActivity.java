@@ -18,9 +18,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-/**
- * Created by nadav on 7/9/2016.
- */
 public class ProfileActivity extends AppCompatActivity {
     static boolean PhoneCallPermission = true;
     static User CurrentActiveProfile = null;
@@ -40,6 +37,7 @@ public class ProfileActivity extends AppCompatActivity {
         PopulateProfilePage(profileId);
     }
 
+    //populate the view with articles
     private void PopulateListView() {
         ListView lv = (ListView) findViewById(R.id.ArticleListProfileListView);
         arrayAdapter = new ArticleListViewAdapter(
@@ -70,6 +68,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
+    //populate the view with information
     private void PopulateProfilePage(int profileId) {
         DAL.getUserByID(profileId, new DALCallbackUserObject() {
             @Override
@@ -93,6 +92,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
+    //show the loction that set by the user
     public void showLocationOnClick(View v) {
         User u = CurrentActiveProfile;
         if (u.getLocationLatitude().isEmpty() || u.getLocationLongtitude().isEmpty()) {
@@ -115,6 +115,8 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
     }
+
+    //call the user
     public void onCallClick(View v) {
         String phoneNumber = ((TextView) findViewById(R.id.PhoneNumberProfileText)).getText().toString();
         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber));

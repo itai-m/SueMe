@@ -8,6 +8,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
+//singleton class that send the request to the db
 public class AppController extends Application {
 
     public static final String TAG = AppController.class.getSimpleName();

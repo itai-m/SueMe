@@ -14,6 +14,7 @@ public class UrlBuider {
     private final static String TRUE = "1";
     private final static String FALSE = "0";
 
+    //build a url for insertUser
     public static String insertUser(User user){
         String toReturn = Constant.DataBase.URL;
         toReturn += Action(Constant.DataBase.INSERT_USER)
@@ -25,6 +26,8 @@ public class UrlBuider {
                 + andEqual(Constant.DataBase.LAWYER, user.isLawyer() ? TRUE : FALSE);
         return urlFix(toReturn);
     }
+
+    //build a url for insertArticle
     public static String insertArticle(Article article){
         String toReturn = Constant.DataBase.URL;
         try {
@@ -39,6 +42,7 @@ public class UrlBuider {
         return urlFix(toReturn);
     }
 
+    //build a url for insertTag
     public static String insertTag(String name) {
         String toReturn = Constant.DataBase.URL;
         toReturn += Action(Constant.DataBase.INSERT_TAG)
@@ -46,6 +50,7 @@ public class UrlBuider {
         return urlFix(toReturn);
     }
 
+    //build a url for insertTagsToArticle
     public static String insertTagsToArticle(int tagID, int articleID, String CreatorDisplayName) {
         String toReturn = Constant.DataBase.URL;
         toReturn += Action(Constant.DataBase.INSERT_TAGS_TO_ARTICLE)
@@ -55,6 +60,7 @@ public class UrlBuider {
         return urlFix(toReturn);
     }
 
+    //build a url for insertComment
     public static String insertComment(Comment comment) {
         String toReturn = Constant.DataBase.URL;
         try {
@@ -69,7 +75,7 @@ public class UrlBuider {
         return urlFix(toReturn);
     }
 
-
+    //build a url for getUser
     public static String getUser(int id) {
         String toReturn = Constant.DataBase.URL;
         toReturn += Action(Constant.DataBase.GET_USER_BY_ID)
@@ -77,6 +83,7 @@ public class UrlBuider {
         return urlFix(toReturn);
     }
 
+    //build a url for getUserByMail
     public static String getUserByMail(String email) {
         String toReturn = Constant.DataBase.URL;
         toReturn += Action(Constant.DataBase.GET_USER_BY_EMAIL)
@@ -84,6 +91,7 @@ public class UrlBuider {
         return urlFix(toReturn);
     }
 
+    //build a url for getCommentByCreatorID
     public static String getCommentByCreatorID(int creatorID) {
         String toReturn = Constant.DataBase.URL;
         toReturn += Action(Constant.DataBase.GET_COMMENT_BY_CREATOR_ID)
@@ -91,6 +99,7 @@ public class UrlBuider {
         return urlFix(toReturn);
     }
 
+    //build a url for getTagByID
     public static String getTagByID(int id) {
         String toReturn = Constant.DataBase.URL;
         toReturn += Action(Constant.DataBase.GET_TAG_BY_ID)
@@ -98,6 +107,7 @@ public class UrlBuider {
         return urlFix(toReturn);
     }
 
+    //build a url for getTagIdByArticleID
     public static String getTagIdByArticleID(int articleID) {
         String toReturn = Constant.DataBase.URL;
         toReturn += Action(Constant.DataBase.GET_TAG_ID_BY_ARTICLE_ID)
@@ -105,6 +115,7 @@ public class UrlBuider {
         return urlFix(toReturn);
     }
 
+    //build a url for getLastArticle
     public static String getLastArticle(int numberOfArticle) {
         String toReturn = Constant.DataBase.URL;
         toReturn += Action(Constant.DataBase.GET_LAST_ARTICLE)
@@ -112,6 +123,7 @@ public class UrlBuider {
         return urlFix(toReturn);
     }
 
+    //build a url for getLastArticleByUserID
     public static String getLastArticleByUserID(int numberOfArticles, int userId) {
         String toReturn = Constant.DataBase.URL;
         toReturn += Action(Constant.DataBase.GET_LAST_ARTICLE_BY_USER_ID)
@@ -119,6 +131,8 @@ public class UrlBuider {
                 + andEqual(Constant.DataBase.CREATOR_ID, String.valueOf(userId)));
         return urlFix(toReturn);
     }
+
+    //build a url for getCommentByArticleID
     public static String getCommentByArticleID(int articleID) {
         String toReturn = Constant.DataBase.URL;
         toReturn += Action(Constant.DataBase.GET_COMMENT_BY_ARTICLE_ID)
@@ -126,6 +140,7 @@ public class UrlBuider {
         return urlFix(toReturn);
     }
 
+    //build a url for searchArticleInTitle
     public static String searchArticleInTitle(String name) {
         String toReturn = Constant.DataBase.URL;
         toReturn += Action(Constant.DataBase.SEARCH_ARTICLE_IN_TITLE)
@@ -133,14 +148,17 @@ public class UrlBuider {
         return urlFix(toReturn);
     }
 
+    //build a url for andEqual
     private static String andEqual(String var, String res){
         return AND + var + EQUAL + res;
     }
 
+    //build a url for Action
     private static String Action(String action){
         return  Constant.DataBase.ACTION + EQUAL + action;
     }
 
+    //build a url for urlFix
     private static String urlFix(String url){
         URI uri = null;
         try {
